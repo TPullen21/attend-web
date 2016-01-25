@@ -1,0 +1,56 @@
+<template name="modules">
+	<h1>My Modules</h1>
+
+	<ul class="accordion" data-accordion>
+	  <li class="accordion-navigation">
+	    <a href="#panel-1" class="moduleHeader">CI301 - Individual Project</a>
+	    <div class="moduleAverage">45%</div>
+	    <div id="panel-1" class="content">
+	      <div class="canvas-holder">
+	      	<canvas id="myChart" width="400" height="400"></canvas>
+	      </div>
+	      <a href="{{pathFor 'module' _id=1}}">See more -></a>
+	    </div>
+	  </li>
+	  <li class="accordion-navigation">
+	    <a href="#panel-2" class="moduleHeader">CI311 - Specification and Refinement</a>
+	    <div class="moduleAverage">80%</div>
+	    <div id="panel-2" class="content">
+	      <div class="canvas-holder">
+	      	<canvas id="myChart2" width="400" height="400"></canvas>
+	      </div>
+	      <a href="{{pathFor 'module' _id=1}}">See more -></a>
+	    </div>
+	  </li>
+	  <li class="accordion-navigation">
+	    <a href="#panel-3" class="moduleHeader">CI346 - Client and Server Side Computing</a>
+	    <div class="moduleAverage">75%</div>
+	    <div id="panel-3" class="content">
+	      <div class="canvas-holder">
+	      	<canvas id="myChart3" width="400" height="400"></canvas>
+	      </div>
+	      <a href="{{pathFor 'module' _id=1}}">See more -></a>
+	    </div>
+	  </li>
+	  <li class="accordion-navigation">
+	    <a href="#panel-4" class="moduleHeader">CI347 - Web and Network Management</a>
+	    <div class="moduleAverage">60%</div>
+	    <div id="panel-4" class="content">
+	      <div class="canvas-holder">
+	      	<canvas id="myChart4" width="400" height="400"></canvas>
+	      </div>
+	      <a href="{{pathFor 'module' _id=1}}">See more -></a>
+	    </div>
+	  </li>
+	  <li class="accordion-navigation">
+	    <a href="#panel-5" class="moduleHeader">CI360 - Mobile Application Development</a>
+	    <div class="moduleAverage">91%</div>
+	    <div id="panel-5" class="content">
+	      <div class="canvas-holder">
+	      	<canvas id="myChart5" width="400" height="400"></canvas>
+	      </div>
+	      <a href="{{pathFor 'module' _id=1}}">See more -></a>
+	    </div>
+	  </li>
+	</ul>
+</template>
