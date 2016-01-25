@@ -1,16 +1,14 @@
 <template name="student">
-	<h1>Student</h1>
-
-	<h2>76%</h2>
+	<h1>{{studentName}}</h1>
 
 	<ul class="accordion" data-accordion>
-		{{#each modules}}
+		{{#each totals}}
 		  <li class="accordion-navigation">
-		    <a href="#panel-{{id}}" class="moduleHeader">{{moduleName}}</a>
-		    <div class="moduleAverage">{{attendance}}%</div>
-		    <div id="panel-{{id}}" class="content">
+		    <a href="#panel-{{index}}" class="moduleHeader">{{module_name}}</a>
+		    <div class="moduleAverage">{{roundPercentage percentage_of_classes_attended}}%</div>
+		    <div id="panel-{{index}}" class="content">
 		      <div class="canvas-holder">
-		      	<canvas id="myChart{{id}}" width="400" height="400"></canvas>
+		      	<canvas id="myChart{{module_id}}" width="400" height="400"></canvas>
 		      </div>
 		    </div>
 		  </li>
