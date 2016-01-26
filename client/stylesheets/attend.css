@@ -2,10 +2,6 @@
 	display:none;
 }
 
-/*canvas {
-	width: 100% !important;
-}*/
-
 .canvas-holder {
 	height: 250px;
 	margin: 80px 10px 30px 10px;
@@ -31,4 +27,8 @@
 
 .content: {
 	clear: left;
+}
+
+.templateHeader {
+	margin-bottom: 20px;
 }

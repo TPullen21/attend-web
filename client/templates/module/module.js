@@ -1,6 +1,10 @@
 Template.module.helpers({
 	students: function(){
-		return [  
+		if (Session.get("students")) {
+			return Session.get("students");
+		} else {
+			return [];
+		}/*[  
 				   {  
 				      "index":1,
 				      "id":12328663,
@@ -211,6 +215,26 @@ Template.module.helpers({
 				      "name":"Chris Lopez",
 				      "attendance":28
 				   }
-				];
+				];*/
+	},
+	module_name: function(){
+		return Session.get("module_name");
+	},
+	module_code: function(){
+		return Session.get("module_code");
 	}
+});
+
+Template.module.onCreated(function() {
+
+    Meteor.call('getModuleAttendance', this.data.moduleID, function(err, jsonResponse) {
+        if(err) {
+            console.log("error occured on receiving data on server. ", err );
+        } else {
+            console.log("JSON Response: ", jsonResponse);
+            Session.set("students", jsonResponse.students);
+            Session.set("module_name", jsonResponse.name);
+            Session.set("module_code", jsonResponse.code);
+        }
+    });
 });

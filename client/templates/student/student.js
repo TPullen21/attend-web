@@ -7,9 +7,6 @@ Template.student.helpers({
     },
     studentName: function() {
         return Session.get("studentName");
-    },
-    roundPercentage: function(percentage) {
-        return Math.round(parseFloat(percentage));
     }
 });
 
