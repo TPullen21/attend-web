@@ -51,7 +51,7 @@ Template.student.events({
 
                     _.each(module, function(occ) {
                         dataArray.push(roundPercentage(occ.percentage_of_classes_attended));
-                        labels.push(getMonth(occ.Month));
+                        labels.push(getMonth(occ.month, occ.year));
                     });
 
                     chartData.labels = labels;
@@ -82,7 +82,7 @@ Template.student.events({
 
                     _.each(module, function(occ) {
                         dataArray.push(roundPercentage(occ.percentage_of_classes_attended));
-                        labels.push(getMonth(occ.Month));
+                        labels.push(getMonth(occ.month, occ.year));
                     });
 
                     chartData.labels = labels;
@@ -178,7 +178,8 @@ var roundPercentage = function(percentage) {
     return Math.round(parseFloat(percentage));
 }
 
-var getMonth = function(monthNumberString) {
+var getMonth = function(monthNumberString, yearString) {
     var calendarMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    return calendarMonths[parseInt(monthNumberString) - 1];
+    var calendarMonthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return calendarMonths[parseInt(monthNumberString) - 1] + ' \'' + yearString.substr(2,2);
 }
