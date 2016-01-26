@@ -8,9 +8,6 @@ Template.student.helpers({
     studentName: function() {
         return Session.get("studentName");
     },
-    breakdown: function() {
-        return Session.get("breakdown");
-    },
     roundPercentage: function(percentage) {
         return Math.round(parseFloat(percentage));
     }
@@ -18,31 +15,15 @@ Template.student.helpers({
 
 Template.student.onCreated(function() {
 
-    Meteor.call('getStudentName', this.data.studentNumber, function(err, jsonResponse) {
+    Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {
             console.log("JSON Response: ", jsonResponse);
-            Session.set("studentName", jsonResponse[0].name);
-        }
-    });
-
-    Meteor.call('getStudentsAttendanceForModulesTotals', this.data.studentNumber, function(err, jsonResponse) {
-        if(err) {
-            console.log("error occured on receiving data on server. ", err );
-        } else {
-            console.log("JSON Response: ", jsonResponse);
-            Session.set("totals", jsonResponse);
-        }
-    });
-
-    Meteor.call('getStudentsAttendanceForModulesPerMonth', this.data.studentNumber, function(err, jsonResponse) {
-        if(err) {
-            console.log("error occured on receiving data on server. ", err );
-        } else {
-            console.log("JSON Response: ", jsonResponse);
-            Session.set("breakdown", jsonResponse);
-            Session.set("breakdownGrouped", _.groupBy(jsonResponse, 'module_name'));
+            Session.set("totals", jsonResponse.breakdown);
+            Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
+            Session.set("totals", jsonResponse.totals);
+            Session.set("studentName", jsonResponse.studentName);
         }
     });
 });
