@@ -17,7 +17,6 @@ Template.student.onCreated(function() {
             console.log("error occured on receiving data on server. ", err );
         } else {
             console.log("JSON Response: ", jsonResponse);
-            Session.set("totals", jsonResponse.breakdown);
             Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
             Session.set("totals", jsonResponse.totals);
             Session.set("studentName", jsonResponse.studentName);
