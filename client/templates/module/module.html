@@ -1,29 +1,31 @@
 <template name="module">
 
-	<h2 class="templateHeader">{{module_code}} - {{module_name}}</h2>
+	{{#if module_name}}
+		<h2 class="templateHeader">{{module_code}} - {{module_name}}</h2>
 
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Student Number</th>
-					<th>Name</th>
-					<th>%</th>
-				</tr>
-			</thead>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Student Number</th>
+						<th>Name</th>
+						<th>%</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				{{#each students}}
-				<tr>
-					<th scope="row">{{index}}</th>
-					<td>{{student_number}}</td>
-					<td><a href="{{pathFor 'student' _id=student_number}}">{{name}}</a></td>
-					<td class={{rowClassForPercentage percentage_of_classes_attended}}>{{roundPercentage percentage_of_classes_attended}}</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</div>
+				<tbody>
+					{{#each students}}
+					<tr>
+						<th scope="row">{{index}}</th>
+						<td>{{student_number}}</td>
+						<td><a href="{{pathFor 'student' _id=student_number}}">{{name}}</a></td>
+						<td class={{rowClassForPercentage percentage_of_classes_attended}}>{{roundPercentage percentage_of_classes_attended}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	{{/if}}
 
 </template>
