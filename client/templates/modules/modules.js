@@ -31,7 +31,7 @@ Template.modules.onRendered(function() {
 });
 
 Template.modules.events({
-    'click .accordion-navigation': function(event){
+    'click .moduleTitle': function(event){
 
         console.log('here');
 

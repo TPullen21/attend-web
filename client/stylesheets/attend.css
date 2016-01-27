@@ -4,31 +4,43 @@
 
 .canvas-holder {
 	height: 250px;
-	margin: 80px 10px 30px 10px;
+	margin: 10px 10px 30px 10px;
 }
 
-.moduleHeader {
-	width: 80%;
+.moduleTitle {
+	max-width: 80%;
+	display: block;
 	float: left;
 }
 
 .moduleAverage {
 	width: 20%;
-	float: left;
 	text-align: right;
-	padding: 15px 10px 17px 0px;
-	background-color: #EFEFEF;
 	font-weight: bold;
+	display: inline-block;
+	float: right;
 }
 
-.accordion-navigation {
-	clear: left;
-}
-
-.content: {
-	clear: left;
+.clearFix {
+	clear: both;
 }
 
 .templateHeader {
 	margin-bottom: 20px;
+}
+
+.panel-heading {
+	background-color: #f2f2f2 !important;
+}
+
+.panel {
+	padding: 10px !important;
+}
+
+.panel-title {
+	margin: 0px !important;
+}
+
+.moduleLink {
+	margin: 0px 10px;
 }

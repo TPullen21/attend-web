@@ -32,7 +32,7 @@ Template.student.onRendered(function() {
 });
 
 Template.student.events({
-    'click .accordion-navigation': function(event){
+    'click .moduleTitle': function(event){
 
         console.log('here');
 
