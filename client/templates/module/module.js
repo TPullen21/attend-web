@@ -222,7 +222,10 @@ Template.module.helpers({
 	},
 	module_code: function(){
 		return Session.get("module_code");
-	}
+	},
+    rowClassForPercentage: function(percentage) {
+        return percentage < 40 ? "danger" : "success";
+    }
 });
 
 Template.module.onCreated(function() {

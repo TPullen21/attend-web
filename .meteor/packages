@@ -23,6 +23,5 @@ accounts-base
 accounts-password
 mrt:flash-messages
 momentjs:moment
-twbs:bootstrap
-ewall:foundation
 http
+twbs:bootstrap
