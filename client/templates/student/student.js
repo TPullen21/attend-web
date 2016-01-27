@@ -7,10 +7,15 @@ Template.student.helpers({
     },
     studentName: function() {
         return Session.get("studentName");
+    },
+    sessionStudentNumberMatchesParameterStudentNumber: function() {
+        return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
     }
 });
 
 Template.student.onCreated(function() {
+
+    Session.set("studentNumberFromParameter", this.data.studentNumber);
 
     Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, function(err, jsonResponse) {
         if(err) {
@@ -20,6 +25,7 @@ Template.student.onCreated(function() {
             Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
             Session.set("totals", jsonResponse.totals);
             Session.set("studentName", jsonResponse.studentName);
+            Session.set("studentNumberFromSession", jsonResponse.studentNumber);
         }
     });
 });
@@ -33,8 +39,6 @@ Template.student.onRendered(function() {
 
 Template.student.events({
     'click .moduleTitle': function(event){
-
-        console.log('here');
 
         if (!loaded) {           
 

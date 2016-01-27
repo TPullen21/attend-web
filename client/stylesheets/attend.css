@@ -52,3 +52,11 @@
 .tableBreakdownHeader {
 	margin: 0px;
 }
+
+.breakdownButton {
+	float: right;
+}
+
+.percentageTableDataCell {
+	max-width: 60px;
+}

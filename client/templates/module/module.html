@@ -1,6 +1,6 @@
 <template name="module">
 
-	{{#if module_name}}
+	{{#if sessionModuleIDMatchesParameterModuleID}}
 		<h2 class="templateHeader">{{module_code}} - {{module_name}}</h2>
 
 		<div class="table-responsive">
@@ -20,7 +20,7 @@
 						<th scope="row">{{index}}</th>
 						<td>{{student_number}}</td>
 						<td><a href="{{pathFor 'student' _id=student_number}}">{{name}}</a></td>
-						<td class={{rowClassForPercentage percentage_of_classes_attended}}>{{roundPercentage percentage_of_classes_attended}}</td>
+						<td class={{rowClassForPercentage percentage_of_classes_attended}}>{{roundPercentage percentage_of_classes_attended}} <a class="btn btn-primary btn-xs breakdownButton" role="button" href="{{pathFor 'student_module_detail' studentNumber=student_number moduleID=../moduleID}}">View breakdown</a></td>
 					</tr>
 					{{/each}}
 				</tbody>

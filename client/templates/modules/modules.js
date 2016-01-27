@@ -33,8 +33,6 @@ Template.modules.onRendered(function() {
 Template.modules.events({
     'click .moduleTitle': function(event){
 
-        console.log('here');
-
         if (!loaded) {           
 
             setTimeout(function() {

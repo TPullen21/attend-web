@@ -1,20 +1,10 @@
 Template.student_module_detail.helpers({
-	occurences: function(){
-		if (Session.get("occurences")) {
-			return Session.get("occurences");
-		} else {
-			return [];
-		}
-	},
 	studentName: function(){
 		return Session.get("studentName");
 	},
-	moduleName: function(){
-		return Session.get("moduleName");
-	},
-	occurencesGrouped: function(){
-		return Session.get("occurencesGrouped");
-	},
+    moduleName: function(){
+        return Session.get("moduleName");
+    },
 	occurencesGroupedCollection: function(){
 		return Session.get("occurencesGroupedCollection");
 	},
@@ -32,14 +22,15 @@ Template.student_module_detail.helpers({
     formatTime: function(timeString) {
     	var time = moment(timeString, "HH:mm:ss");
     	return moment(time).format("HH:mm");
+    },
+    sessionStudentNumberMatchesParameterStudentNumber: function() {
+        return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
     }
 });
 
 Template.student_module_detail.onCreated(function() {
 
-	console.log(this.data);
-	console.log(this.data.studentNumber);
-	console.log(this.data.moduleID);
+    Session.set("studentNumberFromParameter", this.data.studentNumber);
 
     Meteor.call('getStudentsAttendanceForModule', this.data.studentNumber, this.data.moduleID, function(err, jsonResponse) {
         if(err) {
@@ -48,9 +39,9 @@ Template.student_module_detail.onCreated(function() {
             console.log("JSON Response: ", jsonResponse);
             Session.set("moduleName", jsonResponse.moduleName);
             Session.set("studentName", jsonResponse.studentName);
-            Session.set("occurences", jsonResponse.occurences);
+            Session.set("studentNumberFromSession", jsonResponse.studentNumber);
+
             var occurencesGrouped = _.groupBy(jsonResponse.occurences, 'month_and_year');
-            Session.set("occurencesGrouped", occurencesGrouped);
 
             var occurencesGroupedCollection = _.map(Object.keys(occurencesGrouped), function(key) {
             	var classes = _.map(Object.keys(occurencesGrouped[key]), function(classesKey) {
