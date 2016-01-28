@@ -11,18 +11,6 @@ Template.student_module_detail.helpers({
     rowClass: function(bool) {
         return bool == 0 ? "danger" : "";
     },
-    formatMonthAndYear: function(dateString) {
-    	var date = moment(dateString, "M-YYYY");
-    	return moment(date).format("MMMM YYYY");
-    },
-    formatClassDate: function(dateString) {
-    	var date = moment(dateString, "YYYY-MM-D");
-    	return moment(date).format("Do MMM");
-    },
-    formatTime: function(timeString) {
-    	var time = moment(timeString, "HH:mm:ss");
-    	return moment(time).format("HH:mm");
-    },
     sessionStudentNumberMatchesParameterStudentNumber: function() {
         return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
     }

@@ -1,11 +1,10 @@
 Template.module.helpers({
-	students: function(){
-		if (Session.get("students")) {
-			return Session.get("students");
-		} else {
-			return [];
-		}
-	},
+    students: function(){
+        return Session.get("students");
+    },
+    classes: function(){
+        return Session.get("classes");
+    },
 	module_name: function(){
 		return Session.get("module_name");
 	},
@@ -17,6 +16,12 @@ Template.module.helpers({
     },
     sessionModuleIDMatchesParameterModuleID: function() {
         return Session.get("moduleIDFromParameter") === Session.get("moduleIDFromSession");
+    },
+    whatToShow: function(containerDivName) {
+        return containerDivName === Session.get("whatToShow");
+    },
+    rowClass: function(percentage) {
+        return percentage < 40 ? "danger" : "";
     }
 });
 
@@ -33,6 +38,18 @@ Template.module.onCreated(function() {
             Session.set("module_name", jsonResponse.name);
             Session.set("module_code", jsonResponse.code);
             Session.set("students", jsonResponse.students);
+            Session.set("classes", jsonResponse.classes);
+
+            Session.set("whatToShow", Session.get("whatToShow") ? Session.get("whatToShow") : "student");
         }
     });
+});
+
+Template.module.events({
+    'click .btn-class': function(event){
+        Session.set("whatToShow", "class");
+    },
+    'click .btn-student': function(event){
+        Session.set("whatToShow", "student");
+    }        
 });

@@ -60,3 +60,42 @@
 .percentageTableDataCell {
 	max-width: 60px;
 }
+
+.dropdown-lead{
+    width: 80%;
+    box-sizing: border-box;
+}
+.dropdown-toggle{
+    width: 20%;
+    box-sizing: border-box;
+}
+
+.moduleBreakdownBtnList {
+	width: 100%;
+}
+
+.dropdown-menu {
+	width: 100%;
+}
+
+.moduleBreakdownBtnList, .moduleBreakdownBtnGroup {
+	margin: 30px 0px 30px;
+}
+
+@media screen and (max-width: 499px) {
+    .moduleBreakdownBtnList {
+    	display: block;
+    }
+    .moduleBreakdownBtnGroup {
+    	display: none;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .moduleBreakdownBtnList {
+    	display: none;
+    }
+    .moduleBreakdownBtnGroup {
+    	display: block;
+    }
+}
