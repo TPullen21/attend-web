@@ -1,0 +1,30 @@
+<template name="class">
+
+	{{#if sessionOccurrenceIDMatchesParameterOccurrenceID}}
+		<h2 class="templateHeader">{{moduleCode}} - {{moduleName}}</h2>
+		<h2 class="templateHeader">{{occurrenceStart}} - {{occurrenceFinish}}</h2>
+
+		<div class="table-responsive studentBreakdown">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Student Number</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{{#each students}}
+					<tr class={{rowClass attended}}>
+						<th scope="row">{{index}}</th>
+						<td>{{student_number}}</td>
+						<td><a href="{{pathFor 'student' _id=student_number}}">{{name}}</a></td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	{{/if}}
+
+</template>
