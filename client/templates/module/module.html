@@ -4,8 +4,8 @@
 		<h2 class="templateHeader">{{module_code}} - {{module_name}}</h2>
 
 		<div class="btn-group btn-group-justified btn-block moduleBreakdownBtnGroup">
-			<a href=# class="btn btn-default btn-student" role=button>Breakdown by Student</a>
-			<a href=# class="btn btn-default btn-class" role=button>Breakdown by Class</a>
+			<a href=# class="btn btn-{{#if whatToShow "student"}}primary{{else}}default{{/if}} btn-student" role=button>Breakdown by Student</a>
+			<a href=# class="btn btn-{{#if whatToShow "class"}}primary{{else}}default{{/if}} btn-class" role=button>Breakdown by Class</a>
 		</div>
 		<!-- Split button -->
 		<div class="btn-group moduleBreakdownBtnList">
