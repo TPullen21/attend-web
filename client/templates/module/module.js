@@ -19,9 +19,6 @@ Template.module.helpers({
     },
     whatToShow: function(containerDivName) {
         return containerDivName === Session.get("whatToShow");
-    },
-    rowClass: function(percentage) {
-        return percentage < 40 ? "danger" : "";
     }
 });
 
