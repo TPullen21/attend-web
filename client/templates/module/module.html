@@ -15,8 +15,8 @@
 			    <span class="sr-only">Toggle Dropdown</span>
 			  </button>
 			  <ul class="dropdown-menu">
-			    <li><a class="btn-student">Student</a></li>
-			    <li><a class="btn-class">Class</a></li>
+			    <li><a class="btn-student {{#if whatToShow "student"}}btn-selected-dropdown{{/if}}">Student</a></li>
+			    <li><a class="btn-class {{#if whatToShow "class"}}btn-selected-dropdown{{/if}}">Class</a></li>
 			  </ul>
 		     <div class="clearFix"></div>
 		</div>

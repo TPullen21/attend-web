@@ -81,11 +81,9 @@
 
 .dropdown-lead{
     width: 80%;
-    box-sizing: border-box;
 }
 .dropdown-toggle{
     width: 20%;
-    box-sizing: border-box;
 }
 
 .moduleBreakdownBtnList {
@@ -116,4 +114,8 @@
     .moduleBreakdownBtnGroup {
     	display: block;
     }
+}
+
+.btn-selected-dropdown {
+	text-decoration: underline !important;
 }
