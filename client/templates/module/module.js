@@ -2,8 +2,8 @@ Template.module.helpers({
     students: function(){
         return Session.get("students");
     },
-    classes: function(){
-        return Session.get("classes");
+    classesGroupedCollection: function(){
+        return Session.get("classesGroupedCollection");
     },
 	module_name: function(){
 		return Session.get("module_name");
@@ -38,7 +38,16 @@ Template.module.onCreated(function() {
             Session.set("module_name", jsonResponse.name);
             Session.set("module_code", jsonResponse.code);
             Session.set("students", jsonResponse.students);
-            Session.set("classes", jsonResponse.classes);
+
+            var classesGrouped = _.groupBy(jsonResponse.classes, 'month_and_year');
+
+            var classesGroupedCollection = _.map(Object.keys(classesGrouped), function(key) {
+                var classes = _.map(Object.keys(classesGrouped[key]), function(classesKey) {
+                    return classesGrouped[key][classesKey];
+                });
+                return {key: key, classes: classes};
+            });
+            Session.set("classesGroupedCollection", classesGroupedCollection);
 
             Session.set("whatToShow", Session.get("whatToShow") ? Session.get("whatToShow") : "student");
         }
