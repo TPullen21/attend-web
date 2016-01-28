@@ -39,7 +39,13 @@
 							<th scope="row">{{index}}</th>
 							<td>{{student_number}}</td>
 							<td><a href="{{pathFor 'student' _id=student_number}}">{{name}}</a></td>
-							<td class={{rowClassForPercentage percentage_of_classes_attended}}>{{roundPercentage percentage_of_classes_attended}} <a class="btn btn-primary btn-xs breakdownButton" role="button" href="{{pathFor 'student_module_detail' studentNumber=student_number moduleID=../moduleID}}">View breakdown</a></td>
+							<td class={{rowClassForPercentage percentage_of_classes_attended}}>
+								<div class="thingContainer">
+									<div class="moduleClassAttendance">{{roundPercentage percentage_of_classes_attended}}</div>
+									<a class="btn btn-primary btn-xs breakdownButton" role="button" href="{{pathFor 'student_module_detail' studentNumber=student_number moduleID=../moduleID}}">View Breakdown</a>
+					    			<div class="clearFix"></div>
+								</div>
+				    		</td>
 						</tr>
 						{{/each}}
 					</tbody>

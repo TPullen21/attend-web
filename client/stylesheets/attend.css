@@ -21,6 +21,29 @@
 	float: right;
 }
 
+/* ***** Module - Percentage Cell/View Breakdown Button ***** */
+
+.percentageTableDataCell {
+	width: 20%;
+}
+
+.moduleClassAttendance {
+	width: 25%;
+	display: inline-block;
+	float: left;
+}
+
+.breakdownButton {
+	float: right;
+	width: 120px;
+	display: block;
+}
+
+.thingContainer {
+	width: 160px;
+	margin: 0px !important;
+}
+
 .clearFix {
 	clear: both;
 }
@@ -55,10 +78,6 @@
 
 .breakdownButton {
 	float: right;
-}
-
-.percentageTableDataCell {
-	max-width: 60px;
 }
 
 .dropdown-lead{
