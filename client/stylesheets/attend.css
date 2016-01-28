@@ -39,9 +39,8 @@
 	display: block;
 }
 
-.thingContainer {
+.percentageCellContainer {
 	width: 160px;
-	margin: 0px !important;
 }
 
 .clearFix {
