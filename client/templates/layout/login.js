@@ -1,9 +1,19 @@
 Template.login.helpers({
-	userEmail: function(){
+    userEmail: function(){
         if (Meteor.user()) {
-		  return Meteor.user().emails[0].address;
+          return Meteor.user().emails[0].address;
         }
-	}
+    },
+    firstName: function(){
+        if (Meteor.user()) {
+          return Meteor.user().profile.firstName;
+        }
+    },
+    lastName: function(){
+        if (Meteor.user()) {
+          return Meteor.user().profile.lastName;
+        }
+    }
 });
 
 Template.login.events({
@@ -16,34 +26,42 @@ Template.login.events({
 		$('.panel-login').fadeIn();
 	},
 	'submit .register-form': function(event){
+        var firstName = event.target.firstName.value;
+        var lastName = event.target.lastName.value;
 		var email = event.target.email.value;
         var password = event.target.password.value;
-        var password2 = event.target.password2.value;
+        var passwordConfirm = event.target.passwordConfirm.value;
 
-		if (isNotEmpty(email) && 
+		if (isNotEmpty(firstName) &&
+            isNotEmpty(lastName) &&
+            isNotEmpty(email) && 
 			isNotEmpty(password) && 
 			isEmail(email) && 
-			areValidPasswords(password, password2)) {
-		         // Create New User
+			areValidPasswords(password, passwordConfirm)) {
+		         // Create new user
 		            Accounts.createUser({
 		                email: email,
 		                password: password,
 		                profile: {
-		                    usertype: 'staff'
+		                    usertype: 'staff',
+                            firstName: firstName,
+                            lastName: lastName
 		                }
 		            }, function (err) {
 		                if (err) {
-		                    FlashMessages.sendError("There was an error with registration");
+		                    FlashMessages.sendError("There was an error with registration.");
 		                } else {
-		                    FlashMessages.sendSuccess("Account Created! You are now logged in");
-		                    Router.go('/');
+		                    FlashMessages.sendSuccess("Account Created! You are now logged in.");
+		                    Router.go('modules');
 		                }
 		            });
 		    }
-            return false;
+        
+        // Prevent form submission
+        return false;
 	},
 	"submit .login-form": function (event) {
-        // Get Form Values
+
         var email = event.target.email.value;
         var password = event.target.password.value;
 
@@ -53,8 +71,8 @@ Template.login.events({
                 event.target.password.value = password;
                 FlashMessages.sendError(err.reason);
             } else {
-                FlashMessages.sendSuccess('You are now logged in');
-                Router.go('/');
+                FlashMessages.sendSuccess('Welcome back, ' + Meteor.user().profile.firstName + '.');
+                Router.go('modules');
             }
         });
 
@@ -62,7 +80,7 @@ Template.login.events({
         event.target.email.value = "";
         event.target.email.value = "";
 
-        // Prevent Submit
+        // Prevent form submission
         return false;
     },
 	"submit .logout-form": function (event) {
@@ -70,60 +88,66 @@ Template.login.events({
             if (err) {
                 FlashMessages.sendError(err.reason);
             } else {
-                FlashMessages.sendSuccess('You are now logged out');
+                FlashMessages.sendSuccess('You are now logged out.');
                 Router.go('/');
             }
         });
 
-        // Prevent Submit
+        // Prevent form submission
         return false;
     }
 });
 
 
-// VALIDATIONS
+/* **** Input Field Validation **** */
 
-// Trim Helper
+// Remove leading and trailing white space
 var trimInput = function (val) {
     return val.replace(/^\s*|\s*$/g, "");
 }
 
-// Check For Empty Fields
+// Check for empty input fields
 isNotEmpty = function (value) {
     if (value && value !== '') {
         return true;
     }
-    FlashMessages.sendError("Please fill in all fields");
+
+    FlashMessages.sendError("Please fill in all fields.");
     return false;
 };
 
-// Validate Email
+// Validate email with regular expression
 isEmail = function (value) {
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
     if (filter.test(value)) {
         return true;
     }
-    FlashMessages.sendError("Please use a valid email address");
+
+    FlashMessages.sendError("Please enter a valid email address.");
     return false;
 };
 
-// Check Password Field
+// Check length of password field
 isValidPassword = function (password) {
-    if (password.length < 6) {
-        FlashMessages.sendError("Password must be at least 6 characters");
+    if (password.length < 8) {
+        FlashMessages.sendError("Password must be at least 8 characters.");
         return false;
     }
+
     return true;
 };
 
-// Match Password
+// Match passwords
 areValidPasswords = function (password, confirm) {
     if (!isValidPassword(password)) {
         return false;
     }
+
     if (password !== confirm) {
-        FlashMessages.sendError("Passwors do not match");
+        FlashMessages.sendError("Passwords do not match.");
         return false;
     }
+
     return true;
 };
