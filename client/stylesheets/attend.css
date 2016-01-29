@@ -116,6 +116,20 @@
     }
 }
 
+@media screen and (min-width: 992px) {
+    .close {
+    	display: none;
+    }
+}
+
 .btn-selected-dropdown {
 	text-decoration: underline !important;
+}
+
+.alert-override {
+	padding: 0px !important;
+}
+
+.alert-override .close {
+	right: 0px !important;
 }
