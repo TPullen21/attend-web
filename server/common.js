@@ -1,6 +1,6 @@
 Meteor.methods({
-    getStudentsAttendanceInformation: function(studentNumber) {
-        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getStudentAttendanceInformation.php?studentNumber=" + studentNumber;
+    getStudentsAttendanceInformation: function(studentNumber, staffID) {
+        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getStudentAttendanceInformation.php?studentNumber=" + studentNumber + "&staffID=" + staffID;
         // Synchronous GET Request
         var result = HTTP.get(url, {timeout:30000})
         if(result.statusCode==200) {
@@ -12,8 +12,8 @@ Meteor.methods({
             throw new Meteor.Error(result.statusCode, errorJson.error);
         }
     },
-    getModuleAttendance: function(moduleID) {
-        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getModuleAttendance.php?moduleID=" + moduleID;
+    getModuleAttendance: function(moduleID, staffID) {
+        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getModuleAttendance.php?moduleID=" + moduleID + "&staffID=" + staffID;
         // Synchronous GET Request
         var result = HTTP.get(url, {timeout:30000})
         if(result.statusCode==200) {
@@ -25,8 +25,8 @@ Meteor.methods({
             throw new Meteor.Error(result.statusCode, errorJson.error);
         }
     },
-    getClassAttendance: function(occurrenceID) {
-        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getClassAttendance.php?occurrenceID=" + occurrenceID;
+    getClassAttendance: function(occurrenceID, staffID) {
+        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getClassAttendance.php?occurrenceID=" + occurrenceID + "&staffID=" + staffID;
         // Synchronous GET Request
         var result = HTTP.get(url, {timeout:30000})
         if(result.statusCode==200) {
@@ -38,8 +38,8 @@ Meteor.methods({
             throw new Meteor.Error(result.statusCode, errorJson.error);
         }
     },
-    getMyModulesAttendance: function() {
-        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getMyModulesAttendance.php";
+    getMyModulesAttendance: function(staffID) {
+        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getMyModulesAttendance.php?staffID=" + staffID;
         // Synchronous GET Request
         var result = HTTP.get(url, {timeout:30000})
         if(result.statusCode==200) {
@@ -51,8 +51,8 @@ Meteor.methods({
             throw new Meteor.Error(result.statusCode, errorJson.error);
         }
     },
-    getStudentsAttendanceForModule: function(studentNumber, moduleID) {
-        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getStudentsAttendanceForModule.php?studentNumber=" + studentNumber + "&moduleID=" + moduleID;
+    getStudentsAttendanceForModule: function(studentNumber, moduleID, staffID) {
+        var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getStudentsAttendanceForModule.php?studentNumber=" + studentNumber + "&moduleID=" + moduleID + "&staffID=" + staffID;
         // Synchronous GET Request
         var result = HTTP.get(url, {timeout:30000})
         if(result.statusCode==200) {

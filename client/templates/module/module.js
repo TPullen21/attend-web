@@ -26,7 +26,7 @@ Template.module.onCreated(function() {
 
 	Session.set("moduleIDFromParameter", this.data.moduleID);
 
-    Meteor.call('getModuleAttendance', this.data.moduleID, function(err, jsonResponse) {
+    Meteor.call('getModuleAttendance', this.data.moduleID, Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {

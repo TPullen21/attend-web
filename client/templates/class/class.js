@@ -28,7 +28,7 @@ Template.class.onCreated(function() {
 
     Session.set("occurrenceIDFromParameter", this.data.occurrenceID);
 
-    Meteor.call('getClassAttendance', this.data.occurrenceID, function(err, jsonResponse) {
+    Meteor.call('getClassAttendance', this.data.occurrenceID, Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {

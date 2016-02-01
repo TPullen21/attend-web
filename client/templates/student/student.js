@@ -17,7 +17,7 @@ Template.student.onCreated(function() {
 
     Session.set("studentNumberFromParameter", this.data.studentNumber);
 
-    Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, function(err, jsonResponse) {
+    Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {

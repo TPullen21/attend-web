@@ -11,8 +11,8 @@ Template.modules.helpers({
 });
 
 Template.modules.onCreated(function() {
-
-    Meteor.call('getMyModulesAttendance', function(err, jsonResponse) {
+    
+    Meteor.call('getMyModulesAttendance', Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {
