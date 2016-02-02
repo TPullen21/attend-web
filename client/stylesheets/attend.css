@@ -133,3 +133,7 @@
 .alert-override .close {
 	right: 0px !important;
 }
+
+.invalidAccessError {
+	margin-top: 50px;
+}

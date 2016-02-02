@@ -3,26 +3,31 @@
 	{{#if sessionStudentNumberMatchesParameterStudentNumber}}
 		<h1 class="templateHeader">{{studentName}}</h1>
 
-		<div class="panel-group" id="accordion">
-			{{#each totals}}
-			  <div class="panel panel-default">
-			    <div class="panel-heading">
-	      			<h3 class="panel-title">
-				        <a data-toggle="collapse" class="moduleTitle" data-parent="#accordion" href="#collapse{{index}}">
-				        {{module_name}}</a>
-				    	<div class="moduleAverage">{{roundPercentage percentage_of_classes_attended}}%</div>
-				    	<div class="clearFix"></div>
-				    </h3>
-			    </div>
-			    <div id="collapse{{index}}" class="panel-collapse collapse">
-			      <div class="canvas-holder">
-			      	<canvas id="myChart{{module_id}}" width="400" height="400"></canvas>
-			      </div>
-		      	  <a class="moduleLink" href="{{pathFor 'student_module_detail' studentNumber=../studentNumber moduleID=module_id}}">See more -></a>
-			    </div>
-			  </div>
-		  	{{/each}}
-		</div>
+		{{#if noDataOrAccess}}
+			<h4 class="invalidAccessError">Either you do not have access to this student's attendance, or there is no data available. You can return to your list of modules <a href="{{pathFor 'modules'}}">here</a>.</h4>
+		{{else}}
+			<div class="panel-group" id="accordion">
+				{{#each totals}}
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+		      			<h3 class="panel-title">
+					        <a data-toggle="collapse" class="moduleTitle" data-parent="#accordion" href="#collapse{{index}}">
+					        {{module_name}}</a>
+					    	<div class="moduleAverage">{{roundPercentage percentage_of_classes_attended}}%</div>
+					    	<div class="clearFix"></div>
+					    </h3>
+				    </div>
+				    <div id="collapse{{index}}" class="panel-collapse collapse">
+				      <div class="canvas-holder">
+				      	<canvas id="myChart{{module_id}}" width="400" height="400"></canvas>
+				      </div>
+			      	  <a class="moduleLink" href="{{pathFor 'student_module_detail' studentNumber=../studentNumber moduleID=module_id}}">See more -></a>
+				    </div>
+				  </div>
+			  	{{/each}}
+			</div>
+		{{/if}}
+
 	{{/if}}
 	
 </template>

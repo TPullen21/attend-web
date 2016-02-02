@@ -13,6 +13,9 @@ Template.student_module_detail.helpers({
     },
     sessionStudentNumberMatchesParameterStudentNumber: function() {
         return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
+    },
+    noDataOrAccess: function() {
+        return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
     }
 });
 
@@ -27,17 +30,22 @@ Template.student_module_detail.onCreated(function() {
             console.log("JSON Response: ", jsonResponse);
             Session.set("moduleName", jsonResponse.moduleName);
             Session.set("studentName", jsonResponse.studentName);
-            Session.set("studentNumberFromSession", jsonResponse.studentNumber);
+            Session.set("studentNumberFromSession", Session.get("studentNumberFromParameter"));
 
-            var occurencesGrouped = _.groupBy(jsonResponse.occurences, 'month_and_year');
+            if (jsonResponse.occurences.length > 0) {
+                var occurencesGrouped = _.groupBy(jsonResponse.occurences, 'month_and_year');
 
-            var occurencesGroupedCollection = _.map(Object.keys(occurencesGrouped), function(key) {
-            	var classes = _.map(Object.keys(occurencesGrouped[key]), function(classesKey) {
-			        return occurencesGrouped[key][classesKey];
-			    });
-            	return {key: key, classes: classes};
-            });
-            Session.set("occurencesGroupedCollection", occurencesGroupedCollection);
+                var occurencesGroupedCollection = _.map(Object.keys(occurencesGrouped), function(key) {
+                    var classes = _.map(Object.keys(occurencesGrouped[key]), function(classesKey) {
+                        return occurencesGrouped[key][classesKey];
+                    });
+                    return {key: key, classes: classes};
+                });
+                Session.set("occurencesGroupedCollection", occurencesGroupedCollection);
+                Session.set("noDataOrAccess", false);
+            } else {
+                Session.set("noDataOrAccess", true);
+            }
         }
     });
 });

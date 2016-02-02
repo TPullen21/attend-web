@@ -21,6 +21,9 @@ Template.class.helpers({
     },
     sessionOccurrenceIDMatchesParameterOccurrenceID: function() {
         return Session.get("occurrenceIDFromParameter") === Session.get("occurrenceIDFromSession");
+    },
+    noDataOrAccess: function() {
+        return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
     }
 });
 
@@ -28,7 +31,7 @@ Template.class.onCreated(function() {
 
     Session.set("occurrenceIDFromParameter", this.data.occurrenceID);
 
-    Meteor.call('getClassAttendance', this.data.occurrenceID, Meteor.user()._id, function(err, jsonResponse) {
+    Meteor.call('getClassAttendance', this.data.occurrenceID, Meteor.userId(), function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {
@@ -37,8 +40,14 @@ Template.class.onCreated(function() {
             Session.set("moduleCode", jsonResponse.moduleCode);
             Session.set("occurrenceStartDatetime", jsonResponse.occurrenceStartDatetime);
             Session.set("occurrenceFinishDatetime", jsonResponse.occurrenceFinishDatetime);
-            Session.set("occurrenceIDFromSession", jsonResponse.occurrenceID);
-            Session.set("students", jsonResponse.students);
+            Session.set("occurrenceIDFromSession", Session.get("occurrenceIDFromParameter"));
+
+            if (jsonResponse.students.length > 0) {
+                Session.set("students", jsonResponse.students);
+                Session.set("noDataOrAccess", false);
+            } else {
+                Session.set("noDataOrAccess", true);
+            }
         }
     });
 });

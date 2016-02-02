@@ -10,6 +10,9 @@ Template.student.helpers({
     },
     sessionStudentNumberMatchesParameterStudentNumber: function() {
         return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
+    },
+    noDataOrAccess: function() {
+        return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
     }
 });
 
@@ -22,10 +25,16 @@ Template.student.onCreated(function() {
             console.log("error occured on receiving data on server. ", err );
         } else {
             console.log("JSON Response: ", jsonResponse);
-            Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
-            Session.set("totals", jsonResponse.totals);
             Session.set("studentName", jsonResponse.studentName);
+            Session.set("totals", jsonResponse.totals);
             Session.set("studentNumberFromSession", jsonResponse.studentNumber);
+
+            if (jsonResponse.breakdown.length > 0) {
+                Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
+                Session.set("noDataOrAccess", false);
+            } else {
+                Session.set("noDataOrAccess", true);
+            }
         }
     });
 });

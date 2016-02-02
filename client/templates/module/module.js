@@ -19,6 +19,9 @@ Template.module.helpers({
     },
     whatToShow: function(containerDivName) {
         return containerDivName === Session.get("whatToShow");
+    },
+    noDataOrAccess: function() {
+        return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
     }
 });
 
@@ -36,15 +39,23 @@ Template.module.onCreated(function() {
             Session.set("module_code", jsonResponse.code);
             Session.set("students", jsonResponse.students);
 
-            var classesGrouped = _.groupBy(jsonResponse.classes, 'month_and_year');
+            if (jsonResponse.classes.length > 0) {
 
-            var classesGroupedCollection = _.map(Object.keys(classesGrouped), function(key) {
-                var classes = _.map(Object.keys(classesGrouped[key]), function(classesKey) {
-                    return classesGrouped[key][classesKey];
+                var classesGrouped = _.groupBy(jsonResponse.classes, 'month_and_year');
+
+                var classesGroupedCollection = _.map(Object.keys(classesGrouped), function(key) {
+                    var classes = _.map(Object.keys(classesGrouped[key]), function(classesKey) {
+                        return classesGrouped[key][classesKey];
+                    });
+                    return {key: key, classes: classes};
                 });
-                return {key: key, classes: classes};
-            });
-            Session.set("classesGroupedCollection", classesGroupedCollection);
+
+                Session.set("classesGroupedCollection", classesGroupedCollection);
+                Session.set("noDataOrAccess", false);
+
+            } else {
+                Session.set("noDataOrAccess", true);
+            }
 
             Session.set("whatToShow", Session.get("whatToShow") ? Session.get("whatToShow") : "student");
         }
