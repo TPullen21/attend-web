@@ -43,8 +43,6 @@ Template.modules.events({
 
             var breakdownForModuleArray = Session.get('breakdownGrouped')[event.target.innerText];
 
-            console.log(breakdownForModuleArray);
-
             var ctx = document.getElementById("myChart" + event.target.attributes.id.value).getContext("2d");
             var dataArray = [];
             var labels = [];
