@@ -49,61 +49,33 @@ Template.student.onRendered(function() {
 Template.student.events({
     'click .moduleTitle': function(event){
 
-        if (!loaded) {           
+        _.each(lineCharts, function(lineChart) {
+            lineChart.destroy();
+        });
 
-            setTimeout(function() {
+        lineCharts = [];           
 
-                _.each(Session.get('breakdownGrouped'), function(module) {
-                    var ctx = document.getElementById("myChart" + module[0].module_id).getContext("2d");
-                    var dataArray = [];
-                    var labels = [];
+        setTimeout(function() {
 
-                    _.each(module, function(occ) {
-                        dataArray.push(roundPercentage(occ.percentage_of_classes_attended));
-                        labels.push(getMonth(occ.month, occ.year));
-                    });
+            var breakdownForModuleArray = Session.get('breakdownGrouped')[event.target.innerText];
 
-                    chartData.labels = labels;
-                    chartData.datasets[0].data = dataArray;
+            var ctx = document.getElementById("myChart" + event.target.attributes.id.value).getContext("2d");
+            var dataArray = [];
+            var labels = [];
 
-                    var lineChart = new Chart(ctx).Line(chartData, options);
-
-                    lineCharts.push(lineChart);
-                });
-
-            }, 150);
-
-            loaded = true;
-        } else {
-
-            _.each(lineCharts, function(lineChart) {
-                lineChart.destroy();
+            _.each(breakdownForModuleArray, function(occ) {
+                dataArray.push(roundPercentage(occ.percentage_of_classes_attended));
+                labels.push(getMonth(occ.month, occ.year));
             });
 
-            lineCharts = [];       
+            chartData.labels = labels;
+            chartData.datasets[0].data = dataArray;
 
-            setTimeout(function() {
+            var lineChart = new Chart(ctx).Line(chartData, options);
 
-                _.each(Session.get('breakdownGrouped'), function(module) {
-                    var ctx = document.getElementById("myChart" + module[0].module_id).getContext("2d");
-                    var dataArray = [];
-                    var labels = [];
+            lineCharts.push(lineChart);
 
-                    _.each(module, function(occ) {
-                        dataArray.push(roundPercentage(occ.percentage_of_classes_attended));
-                        labels.push(getMonth(occ.month, occ.year));
-                    });
-
-                    chartData.labels = labels;
-                    chartData.datasets[0].data = dataArray;
-
-                    var lineChart = new Chart(ctx).Line(chartData, options);
-
-                    lineCharts.push(lineChart);
-                });
-
-            }, 150);
-        };
+        }, 150);
 
     }
 });
