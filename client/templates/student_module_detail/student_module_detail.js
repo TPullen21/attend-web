@@ -11,8 +11,9 @@ Template.student_module_detail.helpers({
     rowClass: function(bool) {
         return bool == 0 ? "danger" : "";
     },
-    sessionStudentNumberMatchesParameterStudentNumber: function() {
-        return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
+    routeIDsMatchSessionIDs: function() {
+        return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession")
+            && Session.get("moduleIDFromParameter") === Session.get("moduleIDFromSession");
     },
     noDataOrAccess: function() {
         return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
@@ -22,6 +23,7 @@ Template.student_module_detail.helpers({
 Template.student_module_detail.onCreated(function() {
 
     Session.set("studentNumberFromParameter", this.data.studentNumber);
+    Session.set("moduleIDFromParameter", this.data.moduleID);
 
     Meteor.call('getStudentsAttendanceForModule', this.data.studentNumber, this.data.moduleID, Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
@@ -31,6 +33,7 @@ Template.student_module_detail.onCreated(function() {
             Session.set("moduleName", jsonResponse.moduleName);
             Session.set("studentName", jsonResponse.studentName);
             Session.set("studentNumberFromSession", Session.get("studentNumberFromParameter"));
+            Session.set("moduleIDFromSession", Session.get("moduleIDFromParameter"));
 
             if (jsonResponse.occurences.length > 0) {
                 var occurencesGrouped = _.groupBy(jsonResponse.occurences, 'month_and_year');
