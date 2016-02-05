@@ -1,3 +1,5 @@
+/* Server methods */
+
 Meteor.methods({
     getStudentsAttendanceInformation: function(studentNumber, staffID) {
         var url = "http://itsuite.it.brighton.ac.uk/torp10/attend/getStudentAttendanceInformation.php?studentNumber=" + studentNumber + "&staffID=" + staffID;
