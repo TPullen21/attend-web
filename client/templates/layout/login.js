@@ -26,11 +26,11 @@ Template.login.events({
 		$('.panel-login').fadeIn();
 	},
 	'submit .register-form': function(event){
-        var firstName = event.target.firstName.value;
-        var lastName = event.target.lastName.value;
-		var email = event.target.email.value;
-        var password = event.target.password.value;
-        var passwordConfirm = event.target.passwordConfirm.value;
+        var firstName = trimInput(event.target.firstName.value);
+        var lastName = trimInput(event.target.lastName.value);
+		var email = trimInput(event.target.email.value);
+        var password = trimInput(event.target.password.value);
+        var passwordConfirm = trimInput(event.target.passwordConfirm.value);
 
 		if (isNotEmpty(firstName) &&
             isNotEmpty(lastName) &&
@@ -101,9 +101,9 @@ Template.login.events({
 
 /* **** Input Field Validation **** */
 
-// Remove leading and trailing white space
+// Remove all white space
 var trimInput = function (val) {
-    return val.replace(/^\s*|\s*$/g, "");
+    return val.replace(/\s/g, "");
 }
 
 // Check for empty input fields
@@ -118,7 +118,7 @@ isNotEmpty = function (value) {
 
 // Validate email with regular expression
 isEmail = function (value) {
-    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var filter = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (filter.test(value)) {
         return true;
