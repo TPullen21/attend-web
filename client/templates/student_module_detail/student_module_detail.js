@@ -35,7 +35,7 @@ Template.student_module_detail.onCreated(function() {
     Session.set("moduleIDFromParameter", this.data.moduleID);
 
     // Call the server method which returns the class attendance information for this module and student
-    Meteor.call('getStudentsAttendanceForModule', this.data.studentNumber, this.data.moduleID, Meteor.user()._id, function(err, jsonResponse) {
+    Meteor.call('getStudentsAttendanceForModule', this.data.studentNumber, this.data.moduleID, Meteor.userId(), function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {

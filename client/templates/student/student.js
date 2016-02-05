@@ -25,7 +25,7 @@ Template.student.onCreated(function() {
     Session.set("studentNumberFromParameter", this.data.studentNumber);
 
     // Call the server method which returns the average attendance information for all the modules for this student from the database
-    Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, Meteor.user()._id, function(err, jsonResponse) {
+    Meteor.call('getStudentsAttendanceInformation', this.data.studentNumber, Meteor.userId(), function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {

@@ -10,7 +10,7 @@ Template.modules.helpers({
 Template.modules.onCreated(function() {
 
     // Call the server method which returns the average attendance information for all the modules for the current user from the database
-    Meteor.call('getMyModulesAttendance', Meteor.user()._id, function(err, jsonResponse) {
+    Meteor.call('getMyModulesAttendance', Meteor.userId(), function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {
