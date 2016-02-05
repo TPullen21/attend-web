@@ -53,7 +53,7 @@ Template.student.events({
             lineChart.destroy();
         });
 
-        lineCharts = [];           
+        lineCharts = [];
 
         setTimeout(function() {
 

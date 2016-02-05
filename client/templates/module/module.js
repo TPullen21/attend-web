@@ -88,5 +88,5 @@ Template.module.events({
     // If the 'Breakdown by Student' button has been pressed on the button group or dropdown buttons, set the session variable of what to show to 'student'
     'click .btn-student': function(event){
         Session.set("whatToShow", "student");
-    }        
+    }
 });

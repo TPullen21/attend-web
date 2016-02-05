@@ -8,7 +8,7 @@ Template.modules.helpers({
 
 // Called when the template is first created
 Template.modules.onCreated(function() {
-    
+
     // Call the server method which returns the average attendance information for all the modules for the current user from the database
     Meteor.call('getMyModulesAttendance', Meteor.user()._id, function(err, jsonResponse) {
         if(err) {
@@ -32,7 +32,7 @@ Template.modules.onRendered(function() {
 // Functions that will be trigged on certain events within the modules HTML template
 Template.modules.events({
     // When a module name is clicked to expand the breakdown pane
-    'click .moduleTitle': function(event){  
+    'click .moduleTitle': function(event){
 
         // For every chart in the array of created charts, if any, destroy all the charts
         _.each(lineCharts, function(lineChart) {
@@ -40,7 +40,7 @@ Template.modules.events({
         });
 
         // Then set the array an empty array
-        lineCharts = [];           
+        lineCharts = [];
 
         // After 150ms (enough time for the collapsable pane to finish expanding)
         setTimeout(function() {

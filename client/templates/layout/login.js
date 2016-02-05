@@ -64,7 +64,7 @@ Template.login.events({
 	                }
 	            });
 		    }
-        
+
         // Prevent form submission
         return false;
 	},
