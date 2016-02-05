@@ -97,29 +97,28 @@ var chartOptions = {
 
     /* Default chart options */
 
-    scaleShowGridLines : true,
-    scaleGridLineColor : "rgba(0,0,0,.05)",
-    scaleGridLineWidth : 1,
+    scaleShowGridLines: true,
+    scaleGridLineColor: "rgba(0,0,0,.05)",
+    scaleGridLineWidth: 1,
     scaleShowHorizontalLines: true,
     scaleShowVerticalLines: true,
-    bezierCurve : true,
-    bezierCurveTension : 0.4,
-    pointDot : true,
-    pointDotRadius : 4,
-    pointDotStrokeWidth : 1,
-    pointHitDetectionRadius : 20,
-    datasetStroke : true,
-    datasetStrokeWidth : 2,
-    datasetFill : true,
-    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+    bezierCurve: true,
+    bezierCurveTension: 0.4,
+    pointDot: true,
+    pointDotRadius: 4,
+    pointDotStrokeWidth: 1,
+    pointHitDetectionRadius: 20,
+    datasetStroke: true,
+    datasetStrokeWidth: 2,
+    datasetFill: true,
+    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
 
     /* Options to force the y axis to start from 0 and finish at 100 */
 
-    scaleOverride : true,
-    scaleSteps : 10,
-    scaleStepWidth : 10,
-    scaleStartValue : 00
-
+    scaleOverride: true,
+    scaleSteps: 10,
+    scaleStepWidth: 10,
+    scaleStartValue: 00
 };
 
 // Helper method for this file to round a float percentage to the nearest integer

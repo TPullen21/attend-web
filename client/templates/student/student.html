@@ -7,7 +7,7 @@
 			<h4 class="invalidAccessError">Either you do not have access to this student's attendance, or there is no data available. You can return to your list of modules <a href="{{pathFor 'modules'}}">here</a>.</h4>
 		{{else}}
 			<div class="panel-group" id="accordion">
-				{{#each totals}}
+				{{#each modules}}
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 		      			<h3 class="panel-title">
