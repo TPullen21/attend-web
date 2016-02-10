@@ -2,7 +2,7 @@
 Template.student.helpers({
     // The collection of modules average attendance information for this student
     modules: function() {
-        return Session.get("modules");
+        return Session.get("student_modules");
     },
     // This student's name
     studentName: function() {
@@ -31,7 +31,7 @@ Template.student.onCreated(function() {
         } else {
             console.log("JSON Response: ", jsonResponse);
             Session.set("studentName", jsonResponse.studentName);
-            Session.set("modules", jsonResponse.totals);
+            Session.set("student_modules", jsonResponse.totals);
             Session.set("studentNumberFromSession", jsonResponse.studentNumber);
 
             // If the breakdown field of the JSON response contains an array that has a size greater than 0, there's data

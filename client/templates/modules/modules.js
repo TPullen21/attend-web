@@ -2,7 +2,7 @@
 Template.modules.helpers({
     // The collection of modules average attendance information for the current user
     modules: function() {
-        return Session.get("modules");
+        return Session.get("staff_modules");
     }
 });
 
@@ -16,7 +16,7 @@ Template.modules.onCreated(function() {
         } else {
             console.log("JSON Response: ", jsonResponse);
             Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
-            Session.set("modules", jsonResponse.totals);
+            Session.set("staff_modules", jsonResponse.totals);
         }
     });
 });
