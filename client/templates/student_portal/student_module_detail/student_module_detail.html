@@ -1,0 +1,42 @@
+<template name="student_portal_student_module_detail">
+
+	{{#if routeIDsMatchSessionIDs}}
+
+		{{#if noDataOrAccess}}
+			<h4 class="invalidAccessError">Either you do not have access to this student's attendance, or there is no data available.</h4>
+		{{else}}
+			<h2 class="templateHeader">{{studentName}} - {{moduleName}}</h2>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Date</th>
+							<th>Start Time</th>
+							<th>Finish Time</th>
+							<th>Type</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{{#each occurrencesGroupedCollection}}
+							<tr class="info"><td>&nbsp;</td><td colspan=4><h4 class="tableBreakdownHeader">{{formatMonthAndYear key}}</h4></td></tr>
+							{{#each classes}}
+								<tr class={{rowClass attended}}>
+									<th scope="row">{{index}}</th>
+									<td>{{formatClassDate date}}</td>
+									<td>{{formatTime start_time}}</td>
+									<td>{{formatTime finish_time}}</td>
+									<td>{{class_type}}</td>
+								</tr>
+							{{/each}}
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		{{/if}}
+
+	{{/if}}
+
+</template>

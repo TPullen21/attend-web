@@ -50,8 +50,8 @@ Template.class.onCreated(function() {
             console.log("JSON Response: ", jsonResponse);
             Session.set("moduleName", jsonResponse.moduleName);
             Session.set("moduleCode", jsonResponse.moduleCode);
-            Session.set("occurrenceStartDatetime", jsonResponse.occurrenceStartDatetime);
-            Session.set("occurrenceFinishDatetime", jsonResponse.occurrenceFinishDatetime);
+            Session.set("occurrenceStartDatetime", jsonResponse.occurrenceStartDatetime.toString());
+            Session.set("occurrenceFinishDatetime", jsonResponse.occurrenceFinishDatetime.toString());
             Session.set("occurrenceIDFromSession", Session.get("occurrenceIDFromParameter"));
 
             // If the students array field of the JSON response is larger than 0, there's data

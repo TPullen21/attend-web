@@ -154,5 +154,5 @@ var roundPercentage = function(percentage) {
 var formatMonthAndYear = function(monthNumberString, yearString) {
     var calendarMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var calendarMonthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return calendarMonths[parseInt(monthNumberString) - 1] + ' \'' + yearString.substr(2,2);
+    return calendarMonths[parseInt(monthNumberString) - 1] + ' \'' + yearString.toString().substr(2,2);
 }

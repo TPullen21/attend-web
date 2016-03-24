@@ -1,36 +1,62 @@
-// Helper methods for the modules HTML template
-Template.modules.helpers({
-    // The collection of modules average attendance information for the current user
+// Helper methods for the student HTML template
+Template.student_portal_student.helpers({
+    // The collection of modules average attendance information for this student
     modules: function() {
-        return Session.get("staff_modules");
+        return Session.get("student_modules");
+    },
+    // This student's name
+    studentName: function() {
+        return Session.get("studentName");
+    },
+    // Does the route student number match the cached student number?
+    sessionStudentNumberMatchesParameterStudentNumber: function() {
+        return Session.get("studentNumberFromParameter") === Session.get("studentNumberFromSession");
+    },
+    // Has any data been returned from the database?
+    noDataOrAccess: function() {
+        return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
     }
 });
 
 // Called when the template is first created
-Template.modules.onCreated(function() {
+Template.student_portal_student.onCreated(function() {
 
-    // Call the server method which returns the average attendance information for all the modules for the current user from the database
-    Meteor.call('getMyModulesAttendance', Meteor.userId(), function(err, jsonResponse) {
+    // Set a session variable with the route student ID
+    Session.set("studentNumberFromParameter", this.data.studentNumber);
+    var token = this.data.token;
+
+    // Call the server method which returns the average attendance information for all the modules for this student from the database
+    Meteor.call('studentPortal_GetStudentsAttendanceInformation', this.data.studentNumber, this.data.token, function(err, jsonResponse) {
         if(err) {
             console.log("error occured on receiving data on server. ", err );
         } else {
             console.log("JSON Response: ", jsonResponse);
-            Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
-            Session.set("staff_modules", jsonResponse.totals);
+            Session.set("studentName", jsonResponse.studentName);
+            Session.set("student_modules", jsonResponse.totals);
+            Session.set("studentNumberFromSession", jsonResponse.studentNumber);
+
+            // If the breakdown field of the JSON response contains an array that has a size greater than 0, there's data
+            if (jsonResponse.breakdown.length > 0) {
+                Session.set("breakdownGrouped", _.groupBy(jsonResponse.breakdown, 'module_name'));
+                Session.set("noDataOrAccess", false);
+                Session.set("studentPortalToken", token);
+            } else {
+                Session.set("noDataOrAccess", true);
+            }
         }
     });
 });
 
 // Called when the template is fully rendered
-Template.modules.onRendered(function() {
+Template.student_portal_student.onRendered(function() {
     // Set global chart options
     Chart.defaults.global.responsive= true;
     Chart.defaults.global.maintainAspectRatio = false;
     Chart.defaults.global.scaleBeginAtZero = true;
 });
 
-// Functions that will be trigged on certain events within the modules HTML template
-Template.modules.events({
+// Functions that will be trigged on certain events within the student HTML template
+Template.student_portal_student.events({
     // When a module name is clicked to expand the breakdown pane
     'click .moduleTitle': function(event){
 
@@ -131,4 +157,11 @@ var formatMonthAndYear = function(monthNumberString, yearString) {
     var calendarMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var calendarMonthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return calendarMonths[parseInt(monthNumberString) - 1] + ' \'' + yearString.toString().substr(2,2);
+}
+
+var validateToken = function(studentNumber, token) {
+    var hashedNumber = (((studentNumber * 15485863)) % 899999) + 100000;
+    console.log(hashedNumber);
+
+    return token == hashedNumber;
 }
