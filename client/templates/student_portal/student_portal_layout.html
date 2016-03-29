@@ -1,0 +1,16 @@
+<body>
+	{{renderPage}}
+</body>
+
+<template name="student_portal_layout">
+	{{> navbar_student_portal}}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{{> yield}}
+			</div>
+		</div>
+	</div>
+
+	{{> footer}}
+</template>

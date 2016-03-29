@@ -1,0 +1,7 @@
+{
+	"galaxy.meteor.com": {
+		"env": {
+			"MONGO_URL": "mongodb://db:db@ds025459.mlab.com:25459/attend"
+		}
+	}
+}

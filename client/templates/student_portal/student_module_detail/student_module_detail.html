@@ -5,6 +5,7 @@
 		{{#if noDataOrAccess}}
 			<h4 class="invalidAccessError">Either you do not have access to this student's attendance, or there is no data available.</h4>
 		{{else}}
+			<input type="button" class="btn btn-primary" value="Back" onclick="history.back(-1)" />
 			<h2 class="templateHeader">{{studentName}} - {{moduleName}}</h2>
 
 			<div class="table-responsive">

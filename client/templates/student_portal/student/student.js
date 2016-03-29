@@ -24,7 +24,7 @@ Template.student_portal_student.onCreated(function() {
     // Set a session variable with the route student ID
     Session.set("studentNumberFromParameter", this.data.studentNumber);
     var token = this.data.token;
-
+    
     // Call the server method which returns the average attendance information for all the modules for this student from the database
     Meteor.call('studentPortal_GetStudentsAttendanceInformation', this.data.studentNumber, this.data.token, function(err, jsonResponse) {
         if(err) {

@@ -4,7 +4,7 @@
 
 Meteor.methods({
     getStudentsAttendanceInformation: function(studentNumber, staffID) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/student/" + studentNumber;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/student/" + studentNumber;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'staffid' : staffID}, timeout:30000})
         if(result.statusCode==200) {
@@ -17,7 +17,7 @@ Meteor.methods({
         }
     },
     getModuleAttendance: function(moduleID, staffID) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/module/" + moduleID;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/module/" + moduleID;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'staffid' : staffID}, timeout:30000})
         if(result.statusCode==200) {
@@ -30,7 +30,7 @@ Meteor.methods({
         }
     },
     getClassAttendance: function(occurrenceID, staffID) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/class/" + occurrenceID;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/class/" + occurrenceID;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'staffid' : staffID}, timeout:30000})
         if(result.statusCode==200) {
@@ -43,7 +43,7 @@ Meteor.methods({
         }
     },
     getMyModulesAttendance: function(staffID) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/staffModules";
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/staffModules";
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'staffid' : staffID}, timeout:30000})
         if(result.statusCode==200) {
@@ -56,7 +56,7 @@ Meteor.methods({
         }
     },
     getStudentsAttendanceForModule: function(studentNumber, moduleID, staffID) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/student/" + studentNumber + "/module/" + moduleID;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/student/" + studentNumber + "/module/" + moduleID;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'staffid' : staffID}, timeout:30000})
         if(result.statusCode==200) {
@@ -70,7 +70,7 @@ Meteor.methods({
     },
     /* *** Student Portal Methods *** */
     studentPortal_GetStudentsAttendanceInformation: function(studentNumber, token) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/student/" + studentNumber;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/student/" + studentNumber;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'token' : token}, timeout:30000})
         if(result.statusCode==200) {
@@ -83,7 +83,7 @@ Meteor.methods({
         }
     },
     studentPortal_GetStudentsAttendanceForModule: function(studentNumber, moduleID, token) {
-        var url = "http://ec2-52-36-103-68.us-west-2.compute.amazonaws.com:8888/attendance/student/" + studentNumber + "/module/" + moduleID;
+        var url = "http://ec2-52-16-135-99.eu-west-1.compute.amazonaws.com:8888/attendance/student/" + studentNumber + "/module/" + moduleID;
         // Synchronous GET Request
         var result = HTTP.get(url, {headers: {'token' : token}, timeout:30000})
         if(result.statusCode==200) {

@@ -3,6 +3,9 @@ Template.modules.helpers({
     // The collection of modules average attendance information for the current user
     modules: function() {
         return Session.get("staff_modules");
+    },
+    isModule: function(index) {
+        return index > 0;
     }
 });
 
