@@ -15,6 +15,9 @@ Template.student.helpers({
     // Has any data been returned from the database?
     noDataOrAccess: function() {
         return typeof(Session.get("noDataOrAccess")) === 'undefined' ? true : Session.get("noDataOrAccess");
+    },
+    isModule: function(index) {
+        return index > 0;
     }
 });
 

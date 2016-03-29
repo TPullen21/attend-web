@@ -21,7 +21,9 @@
 				      <div class="canvas-holder">
 				      	<canvas id="myChart{{module_id}}" width="400" height="400"></canvas>
 				      </div>
-			      	  <a class="moduleLink" href="{{pathFor 'student_module_detail' studentNumber=../studentNumber moduleID=module_id}}">See more -></a>
+				      {{#if isModule index}}
+			      	  	<a class="moduleLink" href="{{pathFor 'student_module_detail' studentNumber=../studentNumber moduleID=module_id}}">See more -></a>
+			      	  {{/if}}
 				    </div>
 				  </div>
 			  	{{/each}}
