@@ -79,15 +79,18 @@ Template.login.events({
                 event.target.email.value = email;
                 event.target.password.value = password;
                 FlashMessages.sendError(err.reason);
+
+                event.target.password.value = "";
             } else {
+
+                // Clear form
+                event.target.email.value = "";
+                event.target.password.value = "";
+
                 FlashMessages.sendSuccess('Welcome back, ' + Meteor.user().profile.firstName + '.');
                 Router.go('modules');
             }
         });
-
-        // Clear form
-        event.target.email.value = "";
-        event.target.email.value = "";
 
         // Prevent form submission
         return false;
